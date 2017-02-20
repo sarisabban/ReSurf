@@ -58,6 +58,8 @@ for y in dssp_RCSB:
 
 
 
+print('NATAA\nstart')
+
 for x in list_Design:				#Double loop
 	for y in list_RCSB:
 		if x[0]==y[0]:			#If the two lists have the same positions
