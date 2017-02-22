@@ -24,6 +24,7 @@ To use follow these steps:
 5. The RCSB structure should only be the needed chain, multiple chains will cause the script to fail, or give wrong results.
 6. Run by navigating to working directory then typing this in the command line:
 `./ReSurf.py DESIGNED_STRUCTURE.pdb RCSB_STRUCTURE.pdb > Resfile`
+7. Remember to remove the lines that mutate the motif <--- VERY IMPORTANT.
 
 
 
