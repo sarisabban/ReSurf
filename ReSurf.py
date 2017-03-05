@@ -47,9 +47,9 @@ for x in dssp_Design:					#Loop to isolate SASA for each amino acid for Design s
 	elif x[1]=='T':sasa=172*(x[3])
 	elif x[1]=='D':sasa=193*(x[3])
 
-	if (x[2]=='G' or x[2]=='H' or x[2]=='I' or x[2]=='B' or x[2]=='E') and sasa>=60:
+	if (x[2]=='G' or x[2]=='H' or x[2]=='I' or x[2]=='B' or x[2]=='E') and sasa>=60: #Helix (GHI) and Sheet (BE)
 		list_Design.append((x[0],x[1]))
-	elif (x[2]=='-' or x[2]=='T' or x[2]=='S') and sasa>=40:
+	elif (x[2]=='-' or x[2]=='T' or x[2]=='S') and sasa>=40: #Loop (-TS)
 		list_Design.append((x[0],x[1]))
 
 list_RCSB=list()
