@@ -6,6 +6,7 @@
 #
 # Created By:   	Sari Sabban
 # Created Date: 	20 February 2017
+# Modified Date: 	4 May 2017
 
 import re
 import itertools
@@ -13,8 +14,11 @@ import numpy
 import sys
 from Bio.PDB import *
 
-Design=sys.argv[1]					#files input from command line
-RCSB=sys.argv[2]
+Design=sys.argv[1]					#Designed PDB file
+start=int(sys.argv[2])					#Motif start residue
+end=int(sys.argv[3])					#Motif end residue
+RCSB=sys.argv[4]					#RCSB PDB file
+
 							#_
 p=PDBParser()						# |
 structure_Design=p.get_structure('X',Design)		# |
@@ -23,6 +27,8 @@ model_Design=structure_Design[0]			# |Standard structure to setup biopython's DS
 model_RCSB=structure_RCSB[0]				# |
 dssp_Design=DSSP(model_Design,Design,acc_array='Wilke')	# |
 dssp_RCSB=DSSP(model_RCSB,RCSB,acc_array='Wilke')	#_|
+
+
 
 list_Design=list()
 for x in dssp_Design:					#Loop to isolate SASA for each amino acid for Design structure
@@ -52,6 +58,8 @@ for x in dssp_Design:					#Loop to isolate SASA for each amino acid for Design s
 	elif (x[2]=='-' or x[2]=='T' or x[2]=='S') and sasa>=40: #Loop (-TS)
 		list_Design.append((x[0],x[1]))
 
+
+
 list_RCSB=list()
 for y in dssp_RCSB:
 	list_RCSB.append((y[0],y[1]))
@@ -61,6 +69,12 @@ for y in dssp_RCSB:
 print('NATAA\nstart')
 
 for x in list_Design:				#Double loop
-	for y in list_RCSB:
-		if x[0]==y[0]:			#If the two lists have the same positions
-			print(x[0],'A','PIKAA',y[1])	#then print the RCSB amino acid
+	if start <= x[0] <= end:		#Do not include the morif sequence in the resurfacing code
+		continue
+	else:
+		for y in list_RCSB:
+			if x[0]==y[0]:			#If the two lists have the same positions
+				if y[1] == 'X':
+					print(x[0],'A','PIKAA','M')	#Some bacteria has MES instead of M, which is represented as X in DSSP, therefore replace the X with M when found
+				else:
+					print(x[0],'A','PIKAA',y[1])	#for everything else, print the RCSB amino acid
