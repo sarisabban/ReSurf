@@ -21,10 +21,20 @@ To use follow these steps:
 2. Install DSSP in linux by running the following command in terminal (sudo apt-get install dssp).
 3. Install numpy (python3 -m pip install numpy).
 4. All files must be in the same directory as this script.
-5. The RCSB structure should only be the needed chain, multiple chains will cause the script to fail, or give wrong results.
-6. Run by navigating to working directory then typing this in the command line:
-`./ReSurf.py DESIGNED_STRUCTURE.pdb RCSB_STRUCTURE.pdb > Resfile`
-7. Remember to remove the lines that mutate the motif <--- VERY IMPORTANT.
+5. Note the motif's start and end position to exclude it from the code and not accedently mutate it.
+6. The RCSB structure should only be the desired chain, multiple chains will cause the script to fail, or give wrong results.
+7. Run by navigating to working directory then typing this in the command line:
+
+    `python3 ReSurf.py DESIGNED_STRUCTURE.pdb FROM_AA TO_AA RCSB_STRUCTURE.pdb > Resfile`
+
+|Position              |Description                        |
+|----------------------|-----------------------------------|
+|DESIGNED_STRUCTURE.pdb|The file of the designed structure |
+|FROM_AA               |Start of the motif sequence        |
+|TO_AA                 |End of the morif sequence          |
+|RCSB_STRUCTURE.pdb    |The original RCSB structure        |
+|Resfile               |The file with the mutating residues|
+
 
 
 
